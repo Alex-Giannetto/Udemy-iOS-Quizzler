@@ -15,16 +15,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var trueBtn: UIButton!
     @IBOutlet weak var falseBtn: UIButton!
     
+    let quiz = [
+        ["Four + Tow is equal to Six", true],
+        ["Five - Three is gretter than One", true],
+        ["Three + Eight is less than Ten", false]
+    ]
+    
+    var questionNumber = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        progressBar.progress = 0
-        questionLabel.text = "Four + Tow is equal to Six"
+        updateUI()
     }
     
     
     @IBAction func answerBtnPressed(_ sender: UIButton) {
+        if(questionNumber + 1 < quiz.count){
+            questionNumber += 1
+        }
+        updateUI()
+    }
+    
+    func updateUI(){
+        questionLabel.text = quiz[questionNumber][0]
+        progressBar.progress = Float(questionNumber) / Float(quiz.count)
     }
     
 
